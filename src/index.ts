@@ -1,4 +1,7 @@
+// ToDo & Info
 // https://dev.to/macmacky/get-better-with-typescript-using-express-3ik6
+// Refactor by using ExpressJS: https://www.youtube.com/watch?v=-MTSQjw5DrM&t=38s
+
 
 import express from "express";
 import bodyParser from "body-parser";
@@ -26,13 +29,13 @@ app.use(express.urlencoded({extended: true}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-type DogType =  {
-  id: number;
-  name: string;
-  breed: "labrador" | "german shepherd" | "golden retriever";
-  adopted_at: Date | null;
-  birth_date: Date | null;
-}
+// type DogType =  {
+//   id: number;
+//   name: string;
+//   breed: "labrador" | "german shepherd" | "golden retriever";
+//   adopted_at: Date | null;
+//   birth_date: Date | null;
+// }
 
 // GET ALL RECORDS
 app.get('/dogs', (req, res): void => {
@@ -49,14 +52,10 @@ app.get('/dog/:id', (req, res): void => {
   let id: string = req.params.id;
 
   Dog.findById(id)
-    // @ts-ignore
-    .then((result) => {
-      res.send(result)
-    })
-    // @ts-ignore
-    .catch((err) => {
-      console.log(err);
-    })
+  // @ts-ignore
+  .then((result) => {res.send(result)})
+  // @ts-ignore
+  .catch((err) => {console.log(err);})
 });
 
 // CREATE NEW RECORD
@@ -71,78 +70,20 @@ app.post('/dog', (req, res): void => {
   });
   // @ts-ignore
   dog.save() // = instance function
-    // @ts-ignore
-    .then((result) => { res.send(result)})
-    // @ts-ignore
-    .catch((err) => { console.log(err);});
+  // @ts-ignore
+  .then((result) => {res.send(result)})
+  // @ts-ignore
+  .catch((err) => {console.log(err);});
 });
 
+// DELETE RECORD
+// be able to delete by any (combination of) key(s)
+app.delete('/dog/:id', (req, res): void => {
+  let id: string = req.params.id;
 
-
-// app.get<
-//   {}, //   Params,
-//   { data: Dog[]; message: string }, //   ResBody,
-//   {}, //   ReqBody,
-//   {}, //   ReqQuery,
-//   {}  //   Locals
-// >("/dogs/", (req, res) => {
-// });
-
-/* --------------------------------------------------------------------------
-
--------------------------------------------------------------------------- */
-
-// GET /api/v1/dogs
-app.get<
-  {}, //  will be getting a list of dogs, so we will not pass a type in the Params
-  { data: DogType[]; message: string }, // we will send an object that has two properties data whose type is an array of Dogs and message whose type is a string
-  {}, // we won't be receiving any data in this endpoint
-  {
-    page: number;
-    limit: number;
-    breed: "labrador" | "german shepherd" | "golden retriever";
-  }
->("/api/v1/dogs", (req, res) => {
-  // your implementation
+  Dog.findById(id).deleteMany()
+  // @ts-ignore
+  .then((result) => {res.send(result)})
+  // @ts-ignore
+  .catch((err) => {console.log(err);})
 });
-
-// GET /api/v1/dogs/:id
-app.get<
-  { id: number }, // property is an id which has the type of number because we will be getting a specific dog.
-  { data: DogType | null; message: string },
-  {}
->("/api/v1/dogs/:id", (req, res) => {
-  // your implementation
-});
-
-// POST /api/v1/dogs -> creating new dog
-app.post<{}, { data: DogType & { id: number }; message: string }, DogType, {}>(
-  "/api/v1/dogs",
-  (req, res) => {
-    // your implementation
-  }
-);
-
-// PUT /api/v1/dogs/:id
-app.put<
-  { id: number },
-  { data: DogType & { id: number }; message: string },
-  Partial<DogType>, // utility Type Partial that makes every property in the Dog interface optional
-  {}
->("/api/v1/dogs", (req, res) => {
-  // your implementation
-});
-
-// DELETE /api/v1/dogs/:id 
-app.delete<
-{ id: number },
-{ data: DogType & { id: number }, message: string },
-{},
-{}>
-('/api/v1/dogs', (req,res) => { 
-  // your implementation
-})
-// Server the api endpoints.
-// app.listen(port, (): void => {
-//  console.log(`*** Typescript API server http://localhost:${port}/ ***`);
-// });
