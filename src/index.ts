@@ -8,21 +8,21 @@ import bodyParser from "body-parser";
 
 const mongoose = require('mongoose')
 const Dog = require('../models/dog') // = model
-const app = express();
+export const app = express();
 const port: number = 3000;
 const dbURI = 'mongodb+srv://atoth:atoth@cluster0.zd53mvi.mongodb.net/dogs?retryWrites=true&w=majority';
 
-mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
-  // @ts-ignore
-  .then((result) =>
-    console.log("*** Connected to DB! ***"),
-    // @ts-ignore
-    app.listen(port, () : void => console.log(`*** Typescript API server http://localhost:${port}/ ***`)) //  We want to listen for request only after the connection is established.
-  )
-  // @ts-ignore
-  .catch((err) =>
-    console.log(err)
-  );
+// mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
+//   // @ts-ignore
+//   .then((result) => {
+//     console.log("*** Connected to DB! ***"),
+//     // @ts-ignore
+//     app.listen(port, () : void => console.log(`*** Typescript API server http://localhost:${port}/ ***`)) //  We want to listen for request only after the connection is established.
+//   })
+//   // @ts-ignore
+//   .catch((err) =>
+//     console.log(err)
+//   );
 
 app.use(express.json()); // Handle the coming data
 app.use(express.urlencoded({extended: true})); 
