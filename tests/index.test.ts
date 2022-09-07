@@ -1,6 +1,5 @@
-const request = require('supertest');
-// const app = require('./index');
-import { app } from "./index"
+import request from 'supertest';
+import { app } from "../src/app"
 
 describe('API tests', () => {
   it('Get dogs', () => {
@@ -9,4 +8,6 @@ describe('API tests', () => {
     // .get('/dogs')
     // .expect('Content-Type', /json/)
   });
-})
+});
+
+// https://www.youtube.com/watch?v=Ml51d87uoPo 19:55
