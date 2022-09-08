@@ -1,7 +1,5 @@
 import request from 'supertest';
 import { app } from "../src/app"
-import { dbURI, mongoose } from "../src/index"
-const dbUri = require('../src/app');
 
 // beforeEach(async() => {
 //   const connection = await mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})

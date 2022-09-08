@@ -5,7 +5,8 @@
 import express from "express";
 import bodyParser from "body-parser";
 
-const Dog = require('../models/dog') // = model
+import Dog from "./models/dog"
+// const Dog = require('../models/dog') // = model
 export const app = express();
 
 app.use(express.json()); // Handle the coming data
