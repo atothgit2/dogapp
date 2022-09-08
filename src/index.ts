@@ -2,9 +2,9 @@
 // https://dev.to/macmacky/get-better-with-typescript-using-express-3ik6
 // Refactor by using ExpressJS: https://www.youtube.com/watch?v=-MTSQjw5DrM&t=38s
 
-const mongoose = require('mongoose')
+export const mongoose = require('mongoose')
 const port: number = 3000;
-const dbURI = 'mongodb+srv://atoth:atoth@cluster0.zd53mvi.mongodb.net/dogs?retryWrites=true&w=majority';
+export const dbURI = 'mongodb+srv://atoth:atoth@cluster0.zd53mvi.mongodb.net/dogs?retryWrites=true&w=majority';
 import { app } from "./app";
 
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})

@@ -1,11 +1,17 @@
 import request from 'supertest';
 import { app } from "../src/app"
+import { dbURI, mongoose } from "../src/index"
+const dbUri = require('../src/app');
+
+// beforeEach(async() => {
+//   const connection = await mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
+// })
 
 describe('API tests', () => {
   it('Get dogs', () => {
     console.log("Test!!!");
-    // return request(app)
-    // .get('/dogs')
+    expect(1 + 2).toBe(3)
+    // app.get('/dogs')
     // .expect('Content-Type', /json/)
   });
 });
